@@ -11,6 +11,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+.python-version
 
 # IDE
 .idea/
@@ -19,4 +20,34 @@ venv.bak/
 *.swo
 
 # Project specific
-*.csv 
+data/raw/*
+data/perturbed/*
+data/predictions/*
+!data/raw/.gitkeep
+!data/perturbed/.gitkeep
+!data/predictions/.gitkeep
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json 
