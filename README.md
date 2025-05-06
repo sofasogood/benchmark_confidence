@@ -1,4 +1,4 @@
-# BCR Benchmark Power Demo
+# BCR: Benchmark Confidence Rubric
 
 A Python implementation of the BCR (Benchmark Confidence Rubric) framework for evaluating LLM benchmarks. This framework assesses benchmarks across multiple dimensions to provide a comprehensive confidence score:
 
