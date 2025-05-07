@@ -1,0 +1,20 @@
+{
+  "base_accuracy": 87.45519713261649,
+  "perturbations": [
+    {
+      "name": "Paraphrased",
+      "accuracy_drop": 1.7921146953405014,
+      "score": 3
+    },
+    {
+      "name": "Surface noise",
+      "accuracy_drop": 0.0,
+      "score": 3
+    },
+    {
+      "name": "Distractor shuffle",
+      "accuracy_drop": 0.7168458781362119,
+      "score": 3
+    }
+  ]
+}

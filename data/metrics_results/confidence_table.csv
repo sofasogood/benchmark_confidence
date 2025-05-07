@@ -1,0 +1,7 @@
+Metric,Score,Confidence Level,Metadata
+Construct Validity,3,Excellent construct validity (κ ≥ 0.8),κ = 0.885
+Coverage,3,Excellent coverage (H/Hmax ≥ 0.90),H/Hmax = 0.929
+External Validity,2,Good external validity (2pp < gap ≤ 5pp),Gap = 4.6pp
+Difficulty & Discrimination,0,Poor difficulty range (> 20% ceiling/floor),"80.6% ceiling, 9.0% floor"
+Robustness,3,Excellent robustness (drop ≤ 2pp),Drop = 1.8pp
+Power,1,Fair power (5pp < CI width ≤ 10pp),"CI width = 7.5pp, Accuracy = 87.5%"

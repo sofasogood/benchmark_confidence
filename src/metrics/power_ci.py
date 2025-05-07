@@ -1,6 +1,7 @@
 """Calculate confidence intervals and power scores for model predictions."""
 import numpy as np
 import pandas as pd
+import json
 
 THRESHOLDS = [(0.02, 3), (0.05, 2), (0.10, 1)]   # CI width ⇒ rubric
 
@@ -18,8 +19,8 @@ def score_from_width(ci_width):
             return score
     return 0
 
-if __name__ == "__main__":
-    df = pd.read_csv("gpt4_preds.csv")          
+def main(pred_path="data/predictions/gpt4_preds.csv"):
+    df = pd.read_csv(pred_path)          
     acc  = df["is_correct"].mean()
     lo, hi = bootstrap_ci(df["is_correct"].values)
     width  = hi - lo
@@ -29,3 +30,15 @@ if __name__ == "__main__":
     print(f"95 % CI       : [{lo*100:6.2f}, {hi*100:6.2f}] %")
     print(f"CI width      : {width*100:6.2f} pp")
     print(f"BCR Power     : {POWER_SCORE} / 3")
+    
+    return {
+        "accuracy": float(acc * 100),
+        "ci_lower": float(lo * 100),
+        "ci_upper": float(hi * 100),
+        "ci_width": float(width * 100),
+        "score": int(POWER_SCORE)
+    }
+
+if __name__ == "__main__":
+    result = main()
+    print(json.dumps(result, indent=2))

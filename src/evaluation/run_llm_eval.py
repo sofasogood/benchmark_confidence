@@ -6,33 +6,36 @@ import numpy as np
 import pandas as pd
 import openai
 from tqdm import tqdm
+from dotenv import load_dotenv
 from src.utils.dataset import load_mmlu, stratified_sample
+import ast
+
+load_dotenv(override=True)
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--dataset", default="mmlu_test.csv")
-parser.add_argument("--out",     default="gpt4_preds.csv")
+parser.add_argument("--dataset", default="data/raw/mmlu_test.csv")
+parser.add_argument("--out",     default="data/predictions/gpt4_preds.csv")
 
+# Create directories if they don't exist
+os.makedirs("data/raw", exist_ok=True)
+os.makedirs("data/predictions", exist_ok=True)
 
 # ------------------------------------------------------------------ config
-MODEL            = "gpt-4o-mini"     # or "gpt-4o" / "gpt-4-turbo" / etc.
+MODEL            = "gpt-4.1"           # Updated from gpt-4o-mini
 TEMPERATURE      = 0                 # deterministic
 MAX_RETRIES      = 3                 # simple exponential back-off
 SAMPLE_FRACTION  = 0.02 #0.7              # use full dataset
 SEED             = 42
 # -------------------------------------------------------------------------
 
-openai.api_key   = os.environ["OPENAI_API_KEY"]
+# Debug prints for API key
+print("API Key from env:", os.environ.get("OPENAI_API_KEY", "Not found"))
+openai.api_key = os.environ["OPENAI_API_KEY"]
+print("OpenAI API Key set to:", openai.api_key)
+
 rng              = np.random.default_rng(SEED)
 args = parser.parse_args()
-df  = load_mmlu(args.dataset)
-
-if SAMPLE_FRACTION < 1.0:
-    df = stratified_sample(df, frac=SAMPLE_FRACTION, seed=SEED)
-    # df = df.sample(frac=SAMPLE_FRACTION, random_state=SEED).reset_index(drop=True)
-    # Save the sampled dataset
-    sampled_path = args.dataset.replace('.csv', f'_sampled_{SAMPLE_FRACTION}.csv')
-    df.to_csv(sampled_path, index=False)
-    print(f"Saved sampled dataset to {sampled_path}")
+df  = pd.read_csv(args.dataset)
 
 pred_correct: list[int] = []
 
@@ -70,8 +73,8 @@ def query_llm(question: str, choices: list[str]) -> int | None:  # type: ignore
 # ---------------- main loop ------------------------------------------------
 for row in tqdm(df.itertuples(), total=len(df), desc="LLM-eval"):
     assert isinstance(row.question, str)
-    assert isinstance(row.choices, list)
-    idx = query_llm(row.question, row.choices)
+    choices = ast.literal_eval(row.choices)  # Convert string representation of list to actual list
+    idx = query_llm(row.question, choices)
     pred_correct.append(int(idx == row.answer) if idx is not None else 0)
 
 pd.DataFrame({"is_correct": pred_correct}).to_csv(args.out, index=False)
