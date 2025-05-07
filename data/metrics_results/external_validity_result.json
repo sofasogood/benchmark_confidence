@@ -1,0 +1,8 @@
+{
+  "stem_items": 46,
+  "non_stem_items": 233,
+  "stem_accuracy": 91.30434782608695,
+  "non_stem_accuracy": 86.69527896995707,
+  "accuracy_gap": 4.6090688561298805,
+  "score": 2
+}
