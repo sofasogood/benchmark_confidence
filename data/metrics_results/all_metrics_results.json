@@ -1,0 +1,73 @@
+{
+  "construct_validity": {
+    "kappa": 0.8845448976678952,
+    "score": 3,
+    "temperatures": [
+      0.2,
+      0.4,
+      0.6
+    ],
+    "kappas": [
+      0.9142467693870188,
+      0.8733883238568111,
+      0.865999599759856
+    ]
+  },
+  "coverage": {
+    "unique_constructs": 57,
+    "entropy": 5.41920113074345,
+    "max_entropy": 5.832890014164741,
+    "normalized_score": 0.9290765156866188,
+    "score": 3
+  },
+  "external_validity": {
+    "stem_items": 46,
+    "non_stem_items": 233,
+    "stem_accuracy": 91.30434782608695,
+    "non_stem_accuracy": 86.69527896995707,
+    "accuracy_gap": 4.6090688561298805,
+    "score": 2
+  },
+  "difficulty_discrimination": {
+    "total_items": 279,
+    "ceiling_items": 225,
+    "floor_items": 25,
+    "ceiling_percentage": 80.64516129032258,
+    "floor_percentage": 8.960573476702509,
+    "total_percentage": 89.60573476702508,
+    "score": 0
+  },
+  "robustness": {
+    "original_accuracy": 87.45519713261649,
+    "perturbed_accuracy": 85.66308243727599,
+    "accuracy_drop": 1.7921146953405076,
+    "score": 3
+  },
+  "robustness_multi": {
+    "base_accuracy": 87.45519713261649,
+    "perturbations": [
+      {
+        "name": "Paraphrased",
+        "accuracy_drop": 1.7921146953405014,
+        "score": 3
+      },
+      {
+        "name": "Surface noise",
+        "accuracy_drop": 0.0,
+        "score": 3
+      },
+      {
+        "name": "Distractor shuffle",
+        "accuracy_drop": 0.7168458781362119,
+        "score": 3
+      }
+    ]
+  },
+  "power_ci": {
+    "accuracy": 87.45519713261649,
+    "ci_lower": 83.51254480286738,
+    "ci_upper": 91.0394265232975,
+    "ci_width": 7.5268817204301115,
+    "score": 1
+  }
+}
